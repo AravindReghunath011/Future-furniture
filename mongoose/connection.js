@@ -1,8 +1,10 @@
 const mongoose =require('mongoose');
+require('dotenv').config()
 
 module.exports={
     connect(){
-        mongoose.connect('mongodb://0.0.0.0:27017/furnitureShop',{
+        console.log(process.env.MONGO_URL,'ll');
+        mongoose.connect(process.env.MONGO_URL,{
             useNewUrlParser:true,
             useUnifiedTopology:true
         })
@@ -10,6 +12,6 @@ module.exports={
             console.log("Database connected");
         }).catch((err)=>{
             console.log("connection failed",err);
-        })
+        }) 
     }
-}
+} 

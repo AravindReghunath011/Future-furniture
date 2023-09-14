@@ -6,16 +6,16 @@ const bannerModel = require('../models/bannerModel')
 const { default: mongoose } = require('mongoose');
 const couponGenerator = require('voucher-code-generator')
 const couponModel = require('../models/couponModel')
-const moment = require('moment')
-
+const moment = require('moment') 
+ 
 module.exports = {
     getDashboard:async(req,res)=>{
-        let orders = await orderModel.find()
+        let orders = await orderModel.find() 
         res.render('admin/admin-dashboard',{orders})
     },
-    monthlyreport:async(req,res)=>{
+    monthlyreport:async(req,res)=>{ 
         try {
-            console.log('hleooo');
+            console.log('hleooo'); 
           const start = moment().subtract(30, 'days').startOf('day'); // Data for the last 30 days
           const end = moment().endOf('day');
           console.log(start);

@@ -68,7 +68,7 @@ module.exports ={
         let category = await categoryModel.find({}).lean()
         let banner = await bannerModel.find()
         let products = await productModel.find().lean()
-        console.log(products[0].name);
+        console.log(products);
         
         res.render('users/index',{isLoggedIn:req.session.isLoggedIn,category,banner,products});
     },
