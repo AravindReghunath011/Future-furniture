@@ -19,5 +19,16 @@ module.exports = {
         } catch (error) {
             console.log(error.message);
         }
+    },
+    loginAuth:(req,res,next)=>{
+        try {
+            if(req.session.isLoggedIn){
+                res.redirect('/')
+            }else{
+                next()
+            }
+        } catch (error) {
+            console.log(error.message);
+        }
     }
 }

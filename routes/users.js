@@ -13,7 +13,7 @@ let auth = require('../auth/userAuth')
 
 /* GET home page. */
 router.get('/',userController.getHome);
-router.get('/login',userController.getUserlogin)
+router.get('/login',auth.loginAuth,userController.getUserlogin)
 router.get('/signup',userController.getSignup)
 router.get('/otpLoginPage',userController.getloginOtpPage)
 router.get('/otpPage',userController.getOtpPage)

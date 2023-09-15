@@ -91,7 +91,7 @@ module.exports = {
         let admin = await User.findOne({email:req.body.email,isAdmin:1})
         if(admin){
             bcrypt.compare(req.body.password,admin.password).then((status)=>{
-                req.session.adminLogin = true
+                req.session.adminLogin = admin
                 res.redirect('/')
             }).catch((err)=>{
                 console.log(err.message);

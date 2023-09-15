@@ -25,12 +25,15 @@ module.exports ={
       
 
     },
-    userLogin:async(req,res)=>{        
+    userLogin:async(req,res)=>{     
+        console.log(req.body.email);  
+        
         let user = await User.findOne({email:req.body.email}).lean()
-        console.log(user);
+        console.log(user,';;');
         if(user){
         
             bcrypt.compare(req.body.password,user.password).then((status)=>{
+                console.log(status);
                 if(status){
 
                 
@@ -59,6 +62,9 @@ module.exports ={
             })
             
            
+        }else{
+            req.session.noUser = true
+                res.redirect('/login')
         }
         
         

@@ -8,6 +8,7 @@ const ejsLayout = require('express-ejs-layouts')
 const session = require('express-session')
 const db = require('./mongoose/connection')
 const busboy = require('busboy-body-parser')
+const nocache = require('nocache')
 
 var users = require('./routes/users');
 var admin = require('./routes/admin');
@@ -24,6 +25,7 @@ app.set('partials' , './partials')
 app.set('views-user', path.join(__dirname, 'views/user'));
 app.set('views-admin', path.join(__dirname, 'views/admin'));
 app.use(ejsLayout)
+app.use(nocache())
 
 db.connect()
 // uncomment after placing your favicon in /public
