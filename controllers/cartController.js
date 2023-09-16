@@ -186,7 +186,8 @@ module.exports={
         console.log(GrandTotal,'ooooooooooo');
         let coupons = await couponModel.find({ minPrice: { $lte: GrandTotal } })
         console.log(coupons);
-        res.render('users/orderPage',{userData,productDetails,GrandTotal,from:'cart',coupons})
+        console.log(req.session.isLoggedIn);
+        res.render('users/orderPage',{userData,productDetails,GrandTotal,from:'cart',coupons,isLoggedIn:req.session.isLoggedIn})
     }
     },
     makePurchase:async(req,res)=>{ 

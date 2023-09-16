@@ -75,7 +75,7 @@ module.exports={
             noOfPages = Math.round  (noOfPages)
             console.log(noOfPages,'ghjkl');
            
-            res.render('users/userOrderList',{orders,noOfPages})
+            res.render('users/userOrderList',{orders,noOfPages,isLoggedIn:req.session.isLoggedIn})
             
         } catch (error) {
             console.log(error.message);
@@ -126,7 +126,7 @@ module.exports={
         }else{
             console.log('heheheh');
         
-        res.render('users/orderPage',{userData,productDetails,GrandTotal,from:'productDetails',coupons})
+        res.render('users/orderPage',{userData,productDetails,GrandTotal,from:'productDetails',coupons,isLoggedIn:req.session.isLoggedIn})
         }
         }
     },
@@ -199,6 +199,7 @@ module.exports={
            
         }
     }else{
+        console.log('helo');
         if(req.body.status == 'All'){
             console.log(req.body.status);
            
@@ -221,9 +222,10 @@ module.exports={
                     as:'ProductDetails',
                 }}
                
-            ])
-            
+            ]).limit(1)
+            console.log('helo');
             res.json({orders})
+
         }else{
 
             let oid = new mongodb.ObjectId(req.session.isLoggedIn._id)
@@ -247,7 +249,7 @@ module.exports={
                 as:'ProductDetails',
             }}
            
-        ])
+        ]).limit(1)
         console.log(orders,'iiiiiiii');
         res.json({orders})
 

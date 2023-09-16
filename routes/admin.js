@@ -14,7 +14,7 @@ const orderController = require('../controllers/orderController');
 
 
 /* GET users listing. */
-router.get('/',adminAuth.isAdmin, adminController.getDashboard);
+router.get('/', adminAuth.isAdmin,adminController.getDashboard);
 router.get('/adminLogin',adminController.getadminLogin)
 router.get('/categories',adminAuth.isAdmin,categoryController.getCategory)
 router.get('/products',adminAuth.isAdmin,productController.getAddproduct)
@@ -36,6 +36,10 @@ router.get('/banner',adminAuth.isAdmin,adminController.addBanner)
 router.get('/addCoupon',adminAuth.isAdmin,adminController.getAddCoupon)
 router.get('/deleteProduct',adminAuth.isAdmin,productController.deleteProduct)
 router.get('/monthly-report',adminAuth.isAdmin,adminController.monthlyreport)
+router.get('/adminLogout',adminController.logout)
+
+
+
 
 
 

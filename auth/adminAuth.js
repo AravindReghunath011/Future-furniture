@@ -4,7 +4,10 @@ const mongoose = require('mongoose')
 
 module.exports = {
     isAdmin:(req,res,next)=>{
-        if(req.session.isAdmin){
+        console.log('helo');
+        console.log(req.session.adminLogin);
+        if(req.session.adminLogin){
+            console.log('yeasaa');
             next()
         }else{
             res.redirect('/admin/adminlogin')

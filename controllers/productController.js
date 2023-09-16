@@ -151,8 +151,10 @@ module.exports={
         let products = await productModel.find({
             name: { $regex: `${req.body.search}`, $options: 'i' }
         });
+        let category = await categoryModel.find()
+
         console.log(products);
-        res.render('users/showProducts',{products,isLoggedIn:req.session.isLoggedIn})
+        res.render('users/showProducts',{products,isLoggedIn:req.session.isLoggedIn,category})
     }
     
     

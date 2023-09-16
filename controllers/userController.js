@@ -219,9 +219,10 @@ module.exports ={
         res.render('users/otpPage',{otpErr:req.session.otpErr})
         req.session.otpErr = false
     },
-    validOtp:(req,res)=>{
+    validOtp:async(req,res)=>{
         if(req.body.otp.join('')==req.session.loginotp){
-            req.session.isLoggedIn = 'helo'
+            let user = await User.findOne({email:req.session.UserLoginOtpEmail})
+            req.session.isLoggedIn = user
             res.redirect('/')
         }else{
             req.session.otpErr = true
@@ -232,7 +233,8 @@ module.exports ={
         res.render('users/forgetPassword')
     },
     validateNumber: async(req,res)=>{
-        let userExist = await User.findOne({mobile:req.body.number})
+        try {
+            let userExist = await User.findOne({mobile:req.body.number})
         console.log(userExist);
         if(userExist){
             otp = Math.floor(1000 + Math.random() * 9000).toString()
@@ -248,13 +250,19 @@ module.exports ={
                 })
                 .then((data)=>{
                     res.redirect('/forgetpassOtp')
-                } );
+                } ).catch((error)=>{
+                    console.log(error.message);
+                })
         
             }
             sendOTP()
 
         }else{
             res.send('Error occured')
+        }
+            
+        } catch (error) {
+            console.log(error.message);
         }
     },
     getForgetpassOtp:(req,res)=>{
@@ -335,7 +343,7 @@ module.exports ={
             console.log(err.message)
         }
     },
-    getEditAddress:async(req,res)=>{
+    getEditAddress:async(req,res)=>{ 
         try {
             console.log(req.query.id);
             let userAddress = await User.aggregate([

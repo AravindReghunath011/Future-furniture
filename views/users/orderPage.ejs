@@ -238,6 +238,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.5/dist/sweetalert2.min.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.5/dist/sweetalert2.min.js"></script>
 </head>
+<%- include('../partials/user-header')%>
+
 <!-- cart + summary -->
 <section class="bg-light my-5">
     <div class="container">
@@ -345,6 +347,7 @@
             <!-- summary -->
             <div class="col-lg-3">
                 <div class="card mb-3 border shadow-0">
+                    <%if(coupons.length){%>
                     <div class="card-body">
                         <form>
                             <div class="form-group">
@@ -362,6 +365,7 @@
                             </div>
                         </form>
                     </div>
+                    <%}%>
                 </div>
                 <div class="card shadow-0 border">
                     <div class="card-body">
@@ -402,7 +406,7 @@
                                         Make Purchase </a>
                                 <%}%>
                                 <%if(userData.wallet <GrandTotal && userData.wallet != 0){%>
-                                <a  onclick="useWallet()" class="btn btn-info w-100 walletButton"> use wallet</a>
+                                <a  onclick="useWallet()" id="walletButton" class="btn btn-info w-100 "> use wallet</a>
                                     
                                     <%}%>
                                     <p style="display: none;" id="walletId"></p>
@@ -515,6 +519,7 @@
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 <script>
     function useWallet(){
+
       
         
             Swal.fire({
@@ -529,6 +534,7 @@
             }).then((result)=>{
                 if(result.isConfirmed){
                     
+                    
                     let TotalPrice = parseInt(document.getElementById('TotalPrice').innerHTML);
                    
                     let offer =  parseInt(document.getElementById('Discount').innerText )
@@ -541,7 +547,8 @@
                     document.getElementById('Discount').innerText = wallet + offer
                     document.getElementById('TotalPrice').innerText = discount
                     document.getElementById('walletId').innerText = 'used'
-                    document.getElementsByClassName('walletButton').style.display = 'none'
+                    document.getElementById('walletButton').style.display = 'none' 
+                    
                     
 
                 }

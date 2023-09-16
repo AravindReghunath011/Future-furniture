@@ -10,6 +10,7 @@ const moment = require('moment')
  
 module.exports = {
     getDashboard:async(req,res)=>{
+        console.log('yeap from dashboard');
         let orders = await orderModel.find() 
         res.render('admin/admin-dashboard',{orders})
     },
@@ -81,7 +82,7 @@ module.exports = {
       },
     getadminLogin:(req,res)=>{
         if(req.session.adminLogin){
-            res.redirect('/')
+            res.redirect('/admin')
         }else{
             res.render('admin/adminLogin')
         }
@@ -92,11 +93,18 @@ module.exports = {
         if(admin){
             bcrypt.compare(req.body.password,admin.password).then((status)=>{
                 req.session.adminLogin = admin
-                res.redirect('/')
+                console.log(admin);
+                console.log('yep');
+                res.redirect('/admin')
             }).catch((err)=>{
+                console.log('nop');
+            res.redirect('/admin/adminLogin')
+
                 console.log(err.message);
             })
 
+        }else{
+            res.redirect('/admin/adminLogin')
         }
     },
     usersList:async(req,res)=>{
@@ -313,6 +321,14 @@ module.exports = {
             console.log(newCoupon);
             res.redirect('/admin/addCoupon')
 
+        } catch (error) {
+            console.log(error.message);
+        }
+    },  
+    logout:(req,res)=>{
+        try {
+            req.session.adminLogin = false
+            
         } catch (error) {
             console.log(error.message);
         }
