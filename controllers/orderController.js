@@ -4,9 +4,11 @@ const productModel = require("../models/productModel");
 const User = require('../models/userModel')
 const { findById } = require("../models/userModel");
 const couponModel = require("../models/couponModel");
-const easyinvoice = require('easyinvoice');
+// const easyinvoice = require('easyinvoice');
 const fs = require('fs')
 const { Readable } = require("stream")
+// const { PDFDocument } =  import('pdfjs-dist/build/pdf');
+
 
 
 

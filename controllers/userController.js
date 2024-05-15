@@ -13,7 +13,7 @@ const Razorpay = require('razorpay')
 require('dotenv').config()
 const client = require('twilio')(process.env.ACCOUNT_SID, process.env.AUTH_TOKEN);
 
-var instance = new Razorpay({ key_id:process.env.KEY_ID, key_secret: process.env.KEY_SECRET })
+var instance = new Razorpay({ key_id:'rzp_test_GEbMbQd9xNslRS', key_secret: 'secret' })
 
 
 module.exports ={
@@ -24,7 +24,7 @@ module.exports ={
         req.session.loginPassErr = 'helo'
       
 
-    },
+    }, 
     userLogin:async(req,res)=>{     
         console.log(req.body.email);  
         
